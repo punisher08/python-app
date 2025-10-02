@@ -1,0 +1,83 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+{% block assets %}
+<link rel="stylesheet" href="{% static 'app/css/product/single.css' %}">
+{% endblock assets %}
+
+
+{% block content %}
+<div class="single-product-template" style="margin-top: 74px;">
+    <div class="container">
+        <div class="grid row">
+            <div class="item col-lg-6">
+                <div class="product-thumbnail">
+                    <img src="{% static 'app/images/banner-door-nobg.png' %}" alt="">
+                </div>
+            </div>
+            <div class="item col-lg-6">
+                <div class="product-info">
+                    <div class="title ">
+                        <h1 class="primary-title">Doors</h1>
+                    </div>
+                    <div class="price">&#8369;4,500</div>
+                    <div class="description">
+                        <p style="margin: 0;">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Eveniet animi ea placeat iste, quae incidunt id. Reprehenderit soluta placeat sapiente?
+                        </p>
+                    </div>
+
+                    <div class="variations mt-3">
+                        <h4>Choose Size (cm):</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="productSize" id="80x210" value="small">
+                            <label class="form-check-label" for="80x210">
+                                80 x 210
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="productSize" id="90x210" value="medium">
+                            <label class="form-check-label" for="90x210">
+                                90 x 210
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="productSize" id="100x210" value="large">
+                            <label class="form-check-label" for="100x210">
+                                100 x 210
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+     
+    </div>
+</div>
+<section class="container">
+       <div class="about_section layout_padding mt-5">
+            <div class="container">
+                <h1 class="about_taital">Wooden Door Creation</h1>
+                <p class="about_text">It is a long established fact that a reader will be distracted by the readable
+                    content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a
+                    more-or-less normal distribution of letters
+                </p>
+                <div class="d-flex justify-content-center mt-5 youtube-video">
+                    <iframe width="70%" height="400" src="https://www.youtube.com/embed/BZmwGZl3K04"
+                        title="Building a Solid Wood Door | Modern Front Door" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="read_bt_1"><a href="#">Read More</a></div>
+            </div>
+        </div>
+</section>
+
+
+<section class="gallery">
+     {% include 'product/gallery.html' %}
+</section>
+{% endblock content %}

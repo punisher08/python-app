@@ -1,0 +1,105 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container py-4">
+    <h1 class="cycle_taital">Our Gallery</h1>
+    <p class="cycle_text mb-5">It is a long established fact that a reader will be distracted by the </p>
+
+    <!-- Masonry Gallery Container -->
+    <div id="gallery-container" class="row" data-masonry='{"percentPosition": true }'>
+       {% for item in page_obj %}
+          <div class="col-lg-4 col-md-6 mb-4">
+            <img src="{{ item.url }}" class="w-100 shadow-1-strong rounded" alt="{{ item.title }}">
+          </div>
+        {% endfor %}
+    </div>
+
+    <!-- Load More Button -->
+    {% if page_obj.has_next %}
+    <div class="text-center mt-4 d-flex justify-content-center">
+        <button id="load-more" class="btn btn-generate btn-label d-flex justify-content-center align-items-center gap-3"
+            style="width: auto; gap: 5px;" data-page="2"><i class="fa-solid fa-spinner custom-spin "
+                id="loadingSpinner"></i><span>Load More</span></button>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Masonry and jQuery scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+<script defer>
+  const $grid = $('#gallery-container').masonry({
+    itemSelector: '.col-md-6',
+    percentPosition: true
+  });
+
+  function loadMorePage(page, callback = null) {
+    return $.ajax({
+      url: '?page=' + page,
+      type: 'GET',
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      beforeSend: function () {
+   
+     },
+      success: function (data) {
+        setTimeout(() => {
+         $('#loadingSpinner').hide();
+        const $items = $(data.html);
+        $grid.append($items).imagesLoaded(() => {
+          $grid.masonry('appended', $items);
+          if (callback) callback();
+        });
+
+        // Update Load More button
+        const button = $('#load-more');
+        if (data.has_next) {
+          button.data('page', data.next_page);
+        } else {
+          button.remove();
+        }
+
+        // Update URL
+        const url = new URL(window.location);
+        url.searchParams.set('page', page);
+        history.replaceState(null, '', url);
+        }, 1000);
+        
+      },
+      error: function () {
+        alert('Could not load more items.');
+      }
+    });
+  }
+
+  $('#load-more').on('click', function () {
+    const button = $(this);
+    const nextPage = button.data('page');
+    $('#loadingSpinner').show();
+    loadMorePage(nextPage);
+  });
+
+  // Auto-load previous pages if "?page=N" is in URL
+  const targetPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
+
+  if (targetPage > 1) {
+    let currentPage = 1;
+    const button = $('#load-more');
+    button.hide(); // hide until reloaded
+
+    function loadNext() {
+      currentPage++;
+      if (currentPage > targetPage) {
+        button.show();
+        return;
+      }
+      loadMorePage(currentPage, loadNext);
+    }
+
+    loadNext();
+  }
+</script>
+
+{% endblock content %}
