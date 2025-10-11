@@ -18,7 +18,7 @@
                         <h1 class="banner_taital mt-5 mt-5">Wood Doors</h1>
                         <p class="banner_text">It is a long established fact that a reader will be distracted by the
                            readable content </p>
-                        <div class="contact_bt"><a href="{% url 'single-product' %}">Shop Now</a></div>
+                        <div class="contact_bt"><a href="#">Shop Now</a></div>
                      </div>
                   </div>
                </div>
@@ -85,6 +85,13 @@
    <!-- banner section end -->
 </div>
 <!-- header section end -->
+ <div class="cycle_section layout_padding">
+   <div class="container">
+      <h1 class="cycle_taital">Our Products</h1>
+      {% include 'product/cards.html' %}
+
+   </div>
+</div>
 <!-- cycle section start -->
 <div class="cycle_section layout_padding">
    <div class="container">
@@ -104,7 +111,7 @@
                   content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a
                   more-or-less normal distribution of letters</p>
                <div class="btn_main">
-                  <div class="buy_bt"><a href="{% url 'single-product' %}">Buy Now</a></div>
+                  <div class="buy_bt"><a href="">Buy Now</a></div>
                   <h4 class="price_text">Price <span style=" color: #000">$</span> <span style=" color: #000">200</span>
                   </h4>
                </div>

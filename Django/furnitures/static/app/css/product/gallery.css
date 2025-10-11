@@ -1,0 +1,8 @@
+#gallery-container .box p{
+    color: #FFF;
+}
+#gallery-container .box{
+    width: 100%;
+    position: absolute;
+    background: rgba(0, 0, 0, .5);
+}

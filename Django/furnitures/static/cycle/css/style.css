@@ -2,7 +2,11 @@
 
 
 /*--------------------------------------------------------------------- skeleton ---------------------------------------------------------------------*/
-
+.product_slider_images{
+    height: 661px;
+    width: 377px;
+    padding-top: 2rem;
+}
 .generated-image{
     display: flex;
     justify-content: center;
