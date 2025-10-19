@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'products'
+    'products',
+    'assistant',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +134,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+API_KEY = os.getenv("OPENAI_API_KEY")
+
+SESSION_COOKIE_AGE = 300  # 5 minutes
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+AUTH_USER_MODEL = 'accounts.User'
+
+
+

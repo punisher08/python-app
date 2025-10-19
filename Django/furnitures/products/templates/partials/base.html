@@ -33,352 +33,212 @@
    <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}">
    <link rel="stylesoeet" href="{% static 'app/css/owl.theme.default.min.css' %}">
    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" -->
+   <link rel="stylesheet" href="{% static 'app/css/chatbot.css' %}">
+
    {% block assets %}
    {% endblock assets %}
 
 
 </head>
-<style>
-   .chat-messages {
-   max-height: clamp(250px, 50vh, 500px);
-   overflow-y: auto;
-   }
-   #sendBtn{
-    background-color: #000 !important;
-    border: none !important;
-}
-.card .card-header {
-   background-color: #000 !important;
-}
 
-   .chatbot-widget {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      width: 100%;
-      max-width: 380px;
-      z-index: 1050;
-      display: none;
-      /* hidden by default */
-   }
-
-   .chat-toggle-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #000;
-
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 24px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      z-index: 1060;
-   }
-   .bot-message-field{
-    border: 1px solid #000;
-    background-color: #fff !important;
-    color: #000 !important;
-   }
-   .sender-message-field{
-      background-color: #000;
-    padding: 10px 12px;
-    border-radius: 5px;
-   }
-   @media (max-width: 576px) {
-      .chatbot-widget {
-         left: 10px;
-         right: 10px;
-         max-width: calc(100% - 20px);
-      }
-   }
-</style>
 
 <body>
    <!-- header section start -->
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-      <a href="index.html" class="logo"><img src="{% static 'app/images/logo-box-full.png' %}"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse nav-normal" id="navbarSupportedContent">
-         <ul class="navbar-nav mr-auto justify-content-center align-items-center">
-            <li class="nav-item active">
+         <a href="/" class="logo"><img src="{% static 'app/images/logo-box-full.png' %}"></a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a href="{% url 'contact' %}" class="btn btn-outline-info mr-2 text-white">Contact Us</a>
+         </button>
+
+         <div class="collapse navbar-collapse nav-normal" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto justify-content-center align-items-center">
+               <!-- <li class="nav-item active">
                <a class="nav-link" href="/">Home</a>
-            </li>
-            <!-- <li class="nav-item">
+            </li> -->
+               <!-- <li class="nav-item">
                <a class="nav-link" href="">About</a>
             </li> -->
-            <li class="nav-item">
-               <a class="nav-link" href="#">Our Projects</a>
-            </li>
-            <!-- <li class="nav-item">
+               <!-- <li class="nav-item">
+               <a class="nav-link" href="#">Catalog</a>
+            </li> -->
+               <!-- <li class="nav-item">
                <a class="nav-link" href="">Shop</a>
             </li> -->
-            <!-- <li class="nav-item">
+               <!-- <li class="nav-item">
                <a class="nav-link" href="">Blog</a>
             </li> -->
-            <li class="nav-item">
-               <a class="nav-link  text-white" href="#">Create with AI</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link  text-white" href="#">Contact</a>
-            </li>
-           
-         </ul>
-         <form class="form-inline my-2 my-lg-0">
-            <div class="login_menu">
-               <ul>
-                  <li>
-                     {% if user.groups.all.0.name == 'Subscriber' %}
-                        <a href="#">Logout</a>
-                     {% else %}
-                        <a href="#">Login</a>
-                     {% endif %}
+               <!-- <li class="nav-item">
+               <a class="nav-link  text-white" href="#">Categories</a>
+            </li> -->
 
-                  </li>
-                  {% if user.is_anonymous  %}
-                  <li><a href="#">Register</a></li>
-                  {% endif %}
-                 
-                  <!-- <li><a href="#"><img src="{% static 'app/images/trolly-icon.png' %}"></a></li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+               <div class="login_menu">
+                  <ul>
+                     <li> <a href="{% url 'contact' %}" class="btn btn-outline-info">Contact Us</a></li>
+
+
+                     <!-- <li><a href="#"><img src="{% static 'app/images/trolly-icon.png' %}"></a></li>
                   <li><a href="#"><img src="{% static 'app/images/search-icon.png' %}"></a></li> -->
-               </ul>
-            </div>
-            <div></div>
-         </form>
-      </div>
-      <div id="main">
-         <span style="cursor:pointer; color: #fff" onclick="openNav()"><img
-               src="{% static 'app/images/toggle-icon.png' %}" style="height: 20px;"></span>
-      </div>
+                  </ul>
+               </div>
+               <div></div>
+            </form>
+         </div>
+         <div id="main">
+            <span style="cursor:pointer; color: #fff" onclick="openNav()"><img
+                  src="{% static 'app/images/toggle-icon.png' %}" style="height: 20px;"></span>
+
+         </div>
       </div>
    </nav>
-   
-      
-      {% block content %}
-      {% endblock content %}
 
 
-      <!-- footer section start -->
-      <div class="footer_section layout_padding p-5">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-8 col-sm-12 padding_0">
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <img src="{% static 'app/images/logo-box.png' %}">
-                        <div class="call_text">
-                           <span class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita omnis at harum cupiditate impedit recusandae corporis incidunt sed odit cum!</span>
-                        </div>
-                        
-                        
+   {% block content %}
+   {% endblock content %}
+
+
+   <!-- footer section start -->
+   <div class="footer_section layout_padding p-5">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-8 col-sm-12 padding_0">
+               <div class="row">
+                  <div class="col-lg-6">
+                     <img src="{% static 'app/images/logo-box.png' %}">
+                     <div class="call_text">
+                        <span class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita omnis at harum
+                           cupiditate impedit recusandae corporis incidunt sed odit cum!</span>
                      </div>
-                     <div class="col-lg-3">
-                        <h2 class="text-white">Quick Links</h2>
-                        <div class="call_text">
-                           <a href="#"><span class="padding_left_0">Home</span></a>
-                        </div>
-                        <div class="call_text">
-                           <a href="#"><span class="padding_left_0">Our Projects</span></a>
-                        </div>
-                        <div class="call_text">
-                           <a href="#"><span class="padding_left_0">Create with AI</span></a>
-                        </div>
-                        <div class="call_text">
-                           <a href="#"><span class="padding_left_0">Contact</span></a>
-                        </div>
-                        
+
+
+                  </div>
+                  <div class="col-lg-3">
+                     <h2 class="text-white">Quick Links</h2>
+                     <div class="call_text">
+                        <a href="#"><span class="padding_left_0">Home</span></a>
                      </div>
-                     <div class="col-lg-3">
-                        <h2 class="text-white">Quick Links</h2>
-                        <div class="call_text">
-                           <a href="#"><span class="padding_left_0">Link</span></a>
-                        </div>
-                        <div class="call_text">
-                           <a href="#"><span class="padding_left_0">Link</span></a>
-                        </div>
-                        <div class="call_text">
-                           <a href="#"><span class="padding_left_0">Link</span></a>
-                        </div>
-                        <div class="call_text">
-                           <a href="#"><span class="padding_left_0">Link</span></a>
-                        </div>
-                        
+                     <div class="call_text">
+                        <a href="#"><span class="padding_left_0">Catalog</span></a>
                      </div>
+                     <div class="call_text">
+                        <a href="#"><span class="padding_left_0">Create with AI</span></a>
+                     </div>
+                     <div class="call_text">
+                        <a href="#"><span class="padding_left_0">Contact</span></a>
+                     </div>
+
+                  </div>
+                  <div class="col-lg-3">
+                     <h2 class="text-white">Quick Links</h2>
+                     <div class="call_text">
+                        <a href="#"><span class="padding_left_0">Link</span></a>
+                     </div>
+                     <div class="call_text">
+                        <a href="#"><span class="padding_left_0">Link</span></a>
+                     </div>
+                     <div class="call_text">
+                        <a href="#"><span class="padding_left_0">Link</span></a>
+                     </div>
+                     <div class="call_text">
+                        <a href="#"><span class="padding_left_0">Link</span></a>
+                     </div>
+
                   </div>
                </div>
-               <div class="col-lg-4 col-sm-12">
-                  <div class="call_text"><a href="#"><img src="{% static 'app/images/map-icon.png' %}"><span
-                           class="padding_left_0">Page when looking at its layou</span></a></div>
-                  <div class="call_text"><a href="#"><img src="{% static 'app/images/call-icon.png' %}"><span
-                           class="padding_left_0">Call Now +01 123467890</span></a></div>
-                  <div class="call_text"><a href="#"><img src="{% static 'app/images/mail-icon.png' %}"><span
-                           class="padding_left_0">demo@gmail.com</span></a></div>
-                  <div class="social_icon">
-                     <ul>
-                        <li><a href="#"><img src="{% static 'app/images/fb-icon1.png' %}"></a></li>
-                        <li><a href="#"><img src="{% static 'app/images/twitter-icon.png' %}"></a></li>
-                        <li><a href="#"><img src="{% static 'app/images/linkedin-icon.png' %}"></a></li>
-                        <li><a href="#"><img src="{% static 'app/images/instagram-icon.png' %}"></a></li>
-                     </ul>
-                  </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+               <div class="call_text"><a href="#"><img src="{% static 'app/images/map-icon.png' %}"><span
+                        class="padding_left_0">Page when looking at its layou</span></a></div>
+               <div class="call_text"><a href="#"><img src="{% static 'app/images/call-icon.png' %}"><span
+                        class="padding_left_0">Call Now +01 123467890</span></a></div>
+               <div class="call_text"><a href="#"><img src="{% static 'app/images/mail-icon.png' %}"><span
+                        class="padding_left_0">demo@gmail.com</span></a></div>
+               <div class="social_icon">
+                  <ul>
+                     <li><a href="#"><img src="{% static 'app/images/fb-icon1.png' %}"></a></li>
+                     <li><a href="#"><img src="{% static 'app/images/twitter-icon.png' %}"></a></li>
+                     <li><a href="#"><img src="{% static 'app/images/linkedin-icon.png' %}"></a></li>
+                     <li><a href="#"><img src="{% static 'app/images/instagram-icon.png' %}"></a></li>
+                  </ul>
                </div>
             </div>
          </div>
       </div>
-      
-      <!-- footer section end -->
-          <section>
-         <!-- 💬 Chat Toggle Button -->
-         <button id="chatToggle" class="chat-toggle-btn">
-            <i class="fas fa-comment-dots"></i>
-         </button>
+   </div>
 
-         <!-- 💬 Chat Widget -->
-         <div class="chatbot-widget" id="chatWidget">
-            <div class="card" style="border-radius: 15px;">
-               <div
-                  class="card-header d-flex justify-content-between align-items-center p-3 text-white border-bottom-0"
-                  style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                  <span class="fw-bold">Live Chat</span>
+   <!-- footer section end -->
+   <section>
+      <!-- 💬 Chat Toggle Button -->
+      <button id="chatToggle" class="chat-toggle-btn">
+         <i class="fas fa-comment-dots"></i>
+      </button>
+
+      <!-- 💬 Chat Widget -->
+      <div class="chatbot-widget" id="chatWidget">
+         <div class="card" style="border-radius: 15px;">
+            <div class="card-header d-flex justify-content-between align-items-center p-3 text-white border-bottom-0"
+               style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+               <span class="fw-bold">Live Chat</span>
+               <div>
+                  <button id="endChat" class="btn btn-sm btn-danger me-2" title="End Chat" style="display: none;">
+                     <i class="fas fa-trash"></i>
+                  </button>
                   <i class="fas fa-times" id="closeChat" style="cursor: pointer;"></i>
                </div>
 
-               <div class="card-body d-flex flex-column">
-                  <!-- Messages area -->
-                  <div class="chat-messages mb-3" id="chatMessages">
-                     <div class="d-flex flex-row justify-content-start mb-3 ">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                           alt="Bot" style="width: 40px; height: 40px; margin: 5px;">
-                        <div class="p-2 ms-2 rounded bg-info bg-opacity-25 text-white bot-message-field">
-                           <p class="medium m-0">Hi there! How can I help you today?</p>
-                        </div>
+            </div>
+
+            <div class="card-body d-flex flex-column">
+               <!-- Messages area -->
+               <div class="chat-messages mb-3" id="chatMessages">
+                  <div class="d-flex flex-row justify-content-start mb-3 ">
+                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Bot"
+                        style="width: 40px; height: 40px; margin: 5px;">
+                     <div class="p-2 ms-2 rounded bg-info bg-opacity-25 text-white bot-message-field">
+                        <p class="medium m-0">Hi there! How can I help you today?</p>
                      </div>
                   </div>
+               </div>
 
-                  <!-- Input area -->
-                  <div class="input-group">
-                     <textarea id="userInput" class="form-control" rows="1" placeholder="Type a message..."
-                        style="overflow:hidden; resize:none;"></textarea>
-                     <button class="btn btn-primary" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
-                  </div>
+               <!-- 🌐 Language Selector -->
+               <div class="mb-2">
+                  <select id="languageSelect" class="form-select p-2">
+                     <option value="english" selected>English</option>
+                     <option value="filipino">Filipino</option>
+                  </select>
+               </div>
+
+               <!-- Input area -->
+               <div class="input-group">
+                  <textarea id="userInput" class="form-control" rows="1" placeholder="Type a message..."
+                     style="overflow:hidden; resize:none;"></textarea>
+                  <button class="btn btn-primary" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
                </div>
             </div>
          </div>
-      </section>
-      <!-- Javascript files-->
-      <script src="{% static 'app/js/jquery.min.js' %}"></script>
-      <script src="{% static 'app/js/popper.min.js' %}"></script>
-      <script src="{% static 'app/js/bootstrap.bundle.min.js' %}"></script>
-      <script src="{% static 'app/js/jquery-3.0.0.min.js' %}"></script>
-      <script src="{% static 'app/js/plugin.js' %}"></script>
-      <!-- sidebar -->
-      <script src="{% static 'app/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
-      <script src="{% static 'app/js/custom.js' %}"></script>
-      <!-- javascript -->
-      <!-- <script src="{% static 'app/js/owl.carousel.js' %}"></script> -->
-      <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script> -->
-      <script>
-         function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-         }
+      </div>
+   </section>
 
-         function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("main").style.marginLeft = "0";
+   <!-- Javascript files-->
+   <script src="{% static 'app/js/jquery.min.js' %}"></script>
+   <!-- <script src="{% static 'app/js/popper.min.js' %}"></script> -->
+   <script src="{% static 'app/js/bootstrap.bundle.min.js' %}"></script>
+   <script src="{% static 'app/js/jquery-3.0.0.min.js' %}"></script>
+   <!-- <script src="{% static 'app/js/plugin.js' %}"></script> -->
+   <!-- sidebar -->
+   <script src="{% static 'app/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+   <!-- <script src="{% static 'app/js/custom.js' %}"></script> -->
+   <!-- javascript -->
+   <!-- <script src="{% static 'app/js/owl.carousel.js' %}"></script> -->
+   <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script> -->
 
-         }
+   <script src="https://kit.fontawesome.com/24ecc298b3.js" crossorigin="anonymous"></script>
+   <script src="{% static 'app/js/chatbot.js' %}"></script>
 
-         $("#main").click(function () {
-            $("#navbarSupportedContent").toggleClass("nav-normal")
-            //   document.querySelector('.navbar').classList.toggle('active')
-         })
-         window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 0) {
-               navbar.classList.add('active');
-            } else {
-               navbar.classList.remove('active');
-            }
-         });
-
-      </script>
-      <script src="https://kit.fontawesome.com/24ecc298b3.js" crossorigin="anonymous"></script>
-      <script>
-         const chatToggle = document.getElementById('chatToggle');
-         const chatWidget = document.getElementById('chatWidget');
-         const closeChat = document.getElementById('closeChat');
-         const sendBtn = document.getElementById('sendBtn');
-         const userInput = document.getElementById('userInput');
-         const chatMessages = document.getElementById('chatMessages');
-
-         // Toggle chat widget
-         chatToggle.addEventListener('click', () => {
-            chatWidget.style.display = chatWidget.style.display === 'none' || chatWidget.style.display === '' ? 'block' : 'none';
-         });
-
-         // Close button
-         closeChat.addEventListener('click', () => {
-            chatWidget.style.display = 'none';
-         });
-
-         // Send message
-         sendBtn.addEventListener('click', () => {
-            const msg = userInput.value.trim();
-            if (!msg) return;
-
-            appendMessage(msg, 'user');
-            userInput.value = '';
-            userInput.style.height = 'auto';
-
-            // Simulated bot reply after a short delay
-            setTimeout(() => {
-               appendMessage("You said: " + msg, 'bot');
-            }, 800);
-         });
-
-         // Handle Enter key
-         userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-               e.preventDefault();
-               sendBtn.click();
-            }
-         });
-
-         function appendMessage(text, sender) {
-            const wrapper = document.createElement('div');
-            wrapper.className = `d-flex flex-row justify-content-${sender === 'user' ? 'end' : 'start'} mb-3`;
-
-            const bubble = document.createElement('div');
-            bubble.className = `p-2 ${sender === 'user' ? 'me-2 sender-message-field text-white' : 'ms-2 bot-message-field bg-opacity-25 text-white'} rounded`;
-            bubble.innerHTML = `<p class="medium m-0">${text}</p>`;
-
-            if (sender === 'user') {
-               wrapper.appendChild(bubble);
-               wrapper.innerHTML += `<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp" alt="User" style="width: 40px; height: 40px; margin: 5px;">`;
-            } else {
-               wrapper.innerHTML = `<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Bot" style="width: 40px; height: 40px; margin: 5px;">`;
-               wrapper.appendChild(bubble);
-            }
-
-            chatMessages.appendChild(wrapper);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-         }
-         function autoResizeTextarea(textarea) {
-            textarea.style.height = 'auto'; // Reset height
-            textarea.style.height = textarea.scrollHeight + 'px'; // Set new height
-         }
-         userInput.addEventListener('input', () => {
-            autoResizeTextarea(userInput);
-         });
-      </script>
-      <script src="{% static 'app/js/app.js' %}"></script>
+   <script src="{% static 'app/js/app.js' %}"></script>
 </body>
 
 </html>

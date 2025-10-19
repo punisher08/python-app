@@ -1,28 +1,71 @@
-{% extends 'partials/base.html' %}
+
 {% load static %}
+
+{% block assets %}
+  <link rel="stylesheet" href="{% static 'app/css/product/gallery.css' %}">
+{% endblock assets %}
+
 {% block content %}
 
 <div class="container py-4">
-    <h1 class="cycle_taital">Our Gallery</h1>
-    <p class="cycle_text mb-5">It is a long established fact that a reader will be distracted by the </p>
+  <h1 class="cycle_taital">Related Products</h1>
+  <p class="cycle_text mb-5">It is a long established fact that a reader will be distracted by the </p>
 
-    <!-- Masonry Gallery Container -->
-    <div id="gallery-container" class="row" data-masonry='{"percentPosition": true }'>
-       {% for item in page_obj %}
-          <div class="col-lg-4 col-md-6 mb-4">
-            <img src="{{ item.url }}" class="w-100 shadow-1-strong rounded" alt="{{ item.title }}">
-          </div>
-        {% endfor %}
-    </div>
+  <!-- Masonry Gallery Container -->
+<div id="gallery-container" class="row" data-masonry='{"percentPosition": true }'>
+  {% for review in reviews %}
+    <div class="col-lg-4 col-md-6 mb-4" style="overflow: hidden; padding: 010px;">
+      <div class="shadow-sm  bg-white rounded review-images" style="">
+        
+        <!-- Review info -->
+        <div class="box mb-3 hidden" style="display: none;">
+          <p><strong>Username:</strong> {{ review.user.username|default:"Anonymous" }}</p>
+          <p><strong>Rating:</strong> {{ review.rating }} / 5</p>
+          <p><strong>Comment:</strong> {{ review.comment }}</p>
+        </div>
 
-    <!-- Load More Button -->
-    {% if page_obj.has_next %}
-    <div class="text-center mt-4 d-flex justify-content-center">
-        <button id="load-more" class="btn btn-generate btn-label d-flex justify-content-center align-items-center gap-3"
-            style="width: auto; gap: 5px;" data-page="2"><i class="fa-solid fa-spinner custom-spin "
-                id="loadingSpinner"></i><span>Load More</span></button>
+        <!-- Review images -->
+        {% if review.images.all %}
+          {% with review.images.all as review_images %}
+            {% with review_images.0 as main_image %}
+              <!-- Main (first) image -->
+              <div class="main-review-image mb-2">
+                <img src="{{ main_image.image.url }}" class="img-fluid rounded w-100 main-review-image-element" alt="Main review image"
+                     style="object-fit: contain; max-height: 300px;">
+              </div>
+            {% endwith %}
+
+            <!-- Thumbnail images -->
+            {% if review_images|length > 1 %}
+              <div class="d-flex flex-wrap gap-2" style="gap: 10px;">
+                {% for img in review_images|slice:"0:" %}
+                  <div class="thumbnail me-1 mb-1">
+                    <img src="{{ img.image.url }}" class="rounded  thumbnail-images" alt="Review thumbnail"
+                         style="width: 60px; height: 60px; object-fit: cover; cursor: pointer;">
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endwith %}
+        {% else %}
+          <p class="text-muted small">No images uploaded for this review.</p>
+        {% endif %}
+      </div>
     </div>
-    {% endif %}
+  {% empty %}
+    <p>No reviews yet for this product.</p>
+  {% endfor %}
+</div>
+
+
+  <!-- Load More Button -->
+  {% if page_obj.has_next %}
+  <div class="text-center mt-4 d-flex justify-content-center">
+    <button id="load-more" class="btn btn-generate btn-label d-flex justify-content-center align-items-center gap-3"
+      style="width: auto; gap: 5px;" data-page="2"><i class="fa-solid fa-spinner custom-spin "
+        id="loadingSpinner"></i><span>Load More</span></button>
+  </div>
+  {% endif %}
 </div>
 
 <!-- Masonry and jQuery scripts -->
@@ -31,6 +74,14 @@
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 
 <script defer>
+ $('.review-images').on('click', function(e) {
+    if(e.target.classList.contains(('thumbnail-images'))){
+      let imgSrc = $(e.target).attr('src'); 
+      $(this).find('.main-review-image-element').attr('src',imgSrc)
+    }
+
+  });
+
   const $grid = $('#gallery-container').masonry({
     itemSelector: '.col-md-6',
     percentPosition: true
@@ -42,31 +93,31 @@
       type: 'GET',
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
       beforeSend: function () {
-   
-     },
+
+      },
       success: function (data) {
         setTimeout(() => {
-         $('#loadingSpinner').hide();
-        const $items = $(data.html);
-        $grid.append($items).imagesLoaded(() => {
-          $grid.masonry('appended', $items);
-          if (callback) callback();
-        });
+          $('#loadingSpinner').hide();
+          const $items = $(data.html);
+          $grid.append($items).imagesLoaded(() => {
+            $grid.masonry('appended', $items);
+            if (callback) callback();
+          });
 
-        // Update Load More button
-        const button = $('#load-more');
-        if (data.has_next) {
-          button.data('page', data.next_page);
-        } else {
-          button.remove();
-        }
+          // Update Load More button
+          const button = $('#load-more');
+          if (data.has_next) {
+            button.data('page', data.next_page);
+          } else {
+            button.remove();
+          }
 
-        // Update URL
-        const url = new URL(window.location);
-        url.searchParams.set('page', page);
-        history.replaceState(null, '', url);
+          // Update URL
+          const url = new URL(window.location);
+          url.searchParams.set('page', page);
+          history.replaceState(null, '', url);
         }, 1000);
-        
+
       },
       error: function () {
         alert('Could not load more items.');

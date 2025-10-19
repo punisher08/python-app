@@ -1,0 +1,99 @@
+{
+  "business": {
+    "name": "Ignacio Furnitures",
+    "description": "Ignacio Furnitures specializes in high-quality custom wooden doors, furniture, and metal works. We provide durable, stylish, and affordable craftsmanship for both residential and commercial spaces.",
+    "location": "Zone 5, Barangay Care, Tarlac City",
+    "contact": {
+      "phone": "09123456799",
+      "email": "demo@mail.com"
+    },
+    "delivery": {
+      "policy": "Free delivery within Tarlac City area.",
+      "charges": "Delivery charges range from ₱100 to ₱1,000 depending on product size and distance. Free delivery for orders worth ₱20,000 and above."
+    }
+  },
+  "products": [
+    {
+      "name": "Panel Door",
+      "description": "Classic wooden panel door made from durable hardwood with detailed craftsmanship and smooth finish.",
+      "price_range": "₱5,000 – ₱8,000"
+    },
+    {
+      "name": "Flush Door",
+      "description": "Simple, elegant, and smooth-surfaced door ideal for modern interiors.",
+      "price_range": "₱1,500 – ₱2,000"
+    },
+    {
+      "name": "Sliding Door",
+      "description": "Space-saving sliding door available in wood, glass, or mixed materials.",
+      "price_range": "Custom pricing available upon request."
+    },
+    {
+      "name": "Cabinets",
+      "description": "Custom-designed wooden cabinets for kitchens, offices, and storage spaces.",
+      "price_range": "Custom pricing based on size and material."
+    },
+    {
+      "name": "Divider",
+      "description": "Stylish wooden room dividers for open-space interiors.",
+      "price_range": "Custom pricing available."
+    },
+    {
+      "name": "Steel Gate",
+      "description": "Heavy-duty and decorative steel gates designed for security and aesthetic appeal.",
+      "price_range": "Custom quote upon site inspection."
+    },
+    {
+      "name": "Steel Door",
+      "description": "Durable steel doors suitable for both indoor and outdoor use.",
+      "price_range": "Custom pricing available."
+    },
+    {
+      "name": "Grills",
+      "description": "Protective and decorative window and door grills made from high-quality steel.",
+      "price_range": "Custom pricing based on dimensions."
+    },
+    {
+      "name": "Coffee Table",
+      "description": "Handcrafted coffee tables designed to complement any living space.",
+      "price_range": "Custom pricing available."
+    },
+    {
+      "name": "Dining Table",
+      "description": "Elegant wooden dining tables available in various sizes and finishes.",
+      "price_range": "Custom pricing available."
+    },
+    {
+      "name": "Compact Table",
+      "description": "Space-saving compact tables suitable for small rooms or apartments.",
+      "price_range": "Custom pricing available."
+    },
+    {
+      "name": "Computer Table",
+      "description": "Functional computer tables designed for comfort and efficiency.",
+      "price_range": "Custom pricing available."
+    }
+  ],
+  "services": [
+    {
+      "name": "Welding",
+      "description": "Professional welding services for gates, doors, and custom steel projects."
+    },
+    {
+      "name": "Wood Crafts",
+      "description": "Custom wood crafting for doors, furniture, and decor items."
+    },
+    {
+      "name": "Wall Painting",
+      "description": "Interior and exterior wall painting using high-quality materials."
+    },
+    {
+      "name": "Varnish",
+      "description": "Wood varnishing services for enhanced durability and shine."
+    },
+    {
+      "name": "Roof Painting",
+      "description": "Protective roof painting service to extend roof life and improve aesthetics."
+    }
+  ]
+}

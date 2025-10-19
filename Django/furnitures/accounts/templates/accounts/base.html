@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Admin System{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">User System</a>
+      <div>
+        {% if user.is_authenticated %}
+          <span class="text-white me-3">Hello, {{ user.username }}</span>
+          <a href="{% url 'logout' %}" class="btn btn-outline-light btn-sm">Logout</a>
+        {% else %}
+          <a href="{% url 'login' %}" class="btn btn-outline-light btn-sm me-2">Login</a>
+          <a href="{% url 'register' %}" class="btn btn-outline-light btn-sm">Register</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

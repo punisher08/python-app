@@ -1,0 +1,21 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<p>Welcome, {{ user.username }}! You can manage users here.</p>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th><th>Username</th><th>Email</th><th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for u in users %}
+    <tr>
+      <td>{{ u.id }}</td><td>{{ u.username }}</td><td>{{ u.email }}</td><td>{{ u.role }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

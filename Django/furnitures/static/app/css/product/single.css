@@ -22,6 +22,19 @@
     width: 50%;
     height: 400px;
 }
+.primary-btn{
+    background: #000;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+}
+.product_slider_images{
+    max-height: 661px;
+    height: 661px;
+    width: 377px;
+    padding-top: 2rem;
+}
+
 @media (max-width:768px) {
     .youtube-video iframe{
         width: 100%;
