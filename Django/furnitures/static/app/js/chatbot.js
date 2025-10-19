@@ -1,4 +1,3 @@
-
 const chatToggle = document.getElementById('chatToggle');
 const chatWidget = document.getElementById('chatWidget');
 const closeChat = document.getElementById('closeChat');

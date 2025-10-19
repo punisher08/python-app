@@ -41,7 +41,6 @@
 
 </head>
 
-
 <body>
    <!-- header section start -->
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -188,6 +187,12 @@
                   </button>
                   <i class="fas fa-times" id="closeChat" style="cursor: pointer;"></i>
                </div>
+               <div></div>
+            </form>
+         </div>
+         <div id="main">
+            <span style="cursor:pointer; color: #fff" onclick="openNav()"><img
+                  src="{% static 'app/images/toggle-icon.png' %}" style="height: 20px;"></span>
 
             </div>
 
@@ -216,6 +221,22 @@
                   <textarea id="userInput" class="form-control" rows="1" placeholder="Type a message..."
                      style="overflow:hidden; resize:none;"></textarea>
                   <button class="btn btn-primary" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+               </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+               <div class="call_text"><a href="#"><img src="{% static 'app/images/map-icon.png' %}"><span
+                        class="padding_left_0">Page when looking at its layou</span></a></div>
+               <div class="call_text"><a href="#"><img src="{% static 'app/images/call-icon.png' %}"><span
+                        class="padding_left_0">Call Now +01 123467890</span></a></div>
+               <div class="call_text"><a href="#"><img src="{% static 'app/images/mail-icon.png' %}"><span
+                        class="padding_left_0">demo@gmail.com</span></a></div>
+               <div class="social_icon">
+                  <ul>
+                     <li><a href="#"><img src="{% static 'app/images/fb-icon1.png' %}"></a></li>
+                     <li><a href="#"><img src="{% static 'app/images/twitter-icon.png' %}"></a></li>
+                     <li><a href="#"><img src="{% static 'app/images/linkedin-icon.png' %}"></a></li>
+                     <li><a href="#"><img src="{% static 'app/images/instagram-icon.png' %}"></a></li>
+                  </ul>
                </div>
             </div>
          </div>
