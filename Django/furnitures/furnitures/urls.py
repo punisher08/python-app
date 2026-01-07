@@ -18,9 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.shortcuts import redirect
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/login/', lambda request: redirect('/login/')),  # redirect admin login to your own
+    path('admin/', admin.site.urls),  # superusers can still access after login
+
+    path('admin/', lambda request: redirect('/login/')),  # redirect to your login page
     path('', include('products.urls')), 
     path("assistant/", include("assistant.urls")),
     path('', include('accounts.urls')),

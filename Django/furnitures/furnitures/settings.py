@@ -42,12 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
-<<<<<<< HEAD
     'assistant',
     'accounts'
-=======
-    'assistant'
->>>>>>> c762428847df1ec50c0e732daa1eafa6764c583e
 ]
 
 MIDDLEWARE = [
@@ -144,6 +140,8 @@ API_KEY = os.getenv("OPENAI_API_KEY")
 SESSION_COOKIE_AGE = 300  # 5 minutes
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 AUTH_USER_MODEL = 'accounts.User'
+LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 
 

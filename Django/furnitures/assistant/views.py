@@ -83,7 +83,6 @@ def business_assistant(request):
                 model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": system_prompt},
-<<<<<<< HEAD
                     *previous_messages,
                     {"role": "user", "content": user_message},
                 ],
@@ -162,14 +161,3 @@ def end_chat_session(request):
             return JsonResponse({"status": "error", "message": str(e)})
 
     return JsonResponse({"status": "error", "message": "Invalid request method."})
-=======
-                    {"role": "user", "content": user_message},
-                ]
-            )
-            reply = response.choices[0].message.content
-            return JsonResponse({"reply": reply})
-        except Exception as e:
-            return JsonResponse({"reply": f"Error: {str(e)}"})
-
-    return JsonResponse({"reply": "Invalid request."})
->>>>>>> c762428847df1ec50c0e732daa1eafa6764c583e
